@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Accounting – Visual Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b1d3a;
+    --gold: #e8b84b;
+    --teal: #1a8c8c;
+    --coral: #e05a3a;
+    --mint: #d4f4e8;
+    --light: #f5f1ea;
+    --white: #ffffff;
+    --text: #1c1c2e;
+    --muted: #6b7280;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 24px rgba(11,29,58,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 3px solid var(--gold);
+  }
+  nav a {
+    color: #b0bfd4;
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    padding: 1rem 1.1rem;
+    white-space: nowrap;
+    transition: color .2s, background .2s;
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+  nav a:hover, nav a.active { color: var(--gold); background: rgba(232,184,75,0.08); }
+  nav .brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1rem;
+    padding: 1rem 1.5rem 1rem 0;
+    border-right: 2px solid var(--gold);
+    margin-right: 0.5rem;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(232,184,75,0.03) 40px, rgba(232,184,75,0.03) 80px);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--gold);
+    position: relative;
+  }
+  .hero p { color: #b0bfd4; font-size: 1.1rem; margin-top: 0.75rem; position: relative; }
+  .topic-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 1.5rem; position: relative; }
+  .badge {
+    background: rgba(232,184,75,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.35rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* SECTION WRAPPERS */
+  .section { padding: 3rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--gold);
+  }
+  .section-num {
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    font-weight: 900;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--navy);
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--teal);
+  }
+  .card.gold { border-left-color: var(--gold); }
+  .card.coral { border-left-color: var(--coral); }
+  .card.navy { border-left-color: var(--navy); }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--teal);
+    margin: 1rem 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+
+  /* FLOW STEPS */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+  }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 44px;
+    width: 2px;
+    height: calc(100% - 4px);
+    background: var(--gold);
+  }
+  .step-num {
+    background: var(--navy);
+    color: var(--gold);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .step-content {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .step-content strong { color: var(--navy); }
+
+  /* FORMULA BOX */
+  .formula {
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    border-left: 4px solid var(--gold);
+    overflow-x: auto;
+  }
+
+  /* TABLE */
+  .tbl-wrap { overflow-x: auto; margin: 1rem 0; border-radius: 10px; box-shadow: var(--shadow); }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    background: white;
+  }
+  th {
+    background: var(--navy);
+    color: var(--gold);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  tr:nth-child(even) td { background: #fafaf8; }
+  tr.total-row td { background: #e8f4f4; font-weight: 700; border-top: 2px solid var(--teal); }
+  .num { text-align: right; font-family: 'IBM Plex Mono', monospace; }
+  .highlight { background: #fffbec !important; }
+
+  /* DEFINITION BOX */
+  .def-box {
+    background: var(--mint);
+    border-left: 5px solid var(--teal);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+  }
+  .def-box .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--teal);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: #fff8e1;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .callout .icon { font-size: 1.3rem; flex-shrink: 0; }
+  .callout.danger { background: #fff0ec; border-color: var(--coral); }
+  .callout.info { background: #e8f4ff; border-color: #4a90d9; }
+
+  /* VARIANCE TREE */
+  .vtree { margin: 1.5rem 0; }
+  .vtree-root {
+    background: var(--navy);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .vtree-level {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .vtree-level::before {
+    content: '';
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 1rem;
+    background: var(--gold);
+  }
+  .vtree-node {
+    background: var(--teal);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+    max-width: 220px;
+  }
+  .vtree-node.gold-node { background: var(--gold); color: var(--navy); }
+  .vtree-node.coral-node { background: var(--coral); }
+
+  /* ACCORDION Q&A */
+  .qa-item { border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin-bottom: 1rem; }
+  .qa-q {
+    background: var(--navy);
+    color: white;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    transition: background .2s;
+  }
+  .qa-q:hover { background: #162e56; }
+  .qa-q .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+  .qa-q .arrow { transition: transform .3s; font-size: 1.2rem; flex-shrink: 0; }
+  .qa-q.open .arrow { transform: rotate(180deg); }
+  .qa-a {
+    display: none;
+    padding: 1.25rem 1.5rem;
+    background: #fafaf8;
+    border-top: 2px solid var(--gold);
+  }
+  .qa-a.show { display: block; }
+
+  /* CHIPS */
+  .chip {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 1rem;
+    margin: 0.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .chip.teal { background: var(--teal); }
+  .chip.gold { background: var(--gold); color: var(--navy); }
+  .chip.coral { background: var(--coral); }
+
+  /* METHOD COMPARISON */
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .method-box {
+    background: white;
+    border: 2px solid var(--navy);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .method-box h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  .method-box p { font-size: 0.85rem; color: var(--muted); }
+
+  /* VISUAL DIVIDER */
+  .divider {
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--teal), var(--gold));
+    margin: 3rem 0 0;
+    opacity: 0.4;
+  }
+
+  /* WORKED EXAMPLE */
+  .worked {
+    background: #fffdf5;
+    border: 2px dashed var(--gold);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 1.5rem 0;
+  }
+  .worked-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .worked-title::before {
+    content: '▶';
+    font-size: 0.7rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .section { padding: 2rem 1rem; }
+    .card { padding: 1.25rem; }
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: #b0bfd4;
+    text-align: center;
+    padding: 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    margin-top: 4rem;
+    border-top: 3px solid var(--gold);
+  }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="brand">BS 222</span>
+  <a href="#foundations">Foundations</a>
+  <a href="#overheads">Overheads</a>
+  <a href="#standard-costing">Standard Costing</a>
+  <a href="#variance">Variance Analysis</a>
+  <a href="#cvp">CVP Analysis</a>
+  <a href="#costing-methods">Costing Methods</a>
+  <a href="#qa">Q &amp; A</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Cost Accounting</h1>
+  <p>Comprehensive Visual Study Guide — Step-by-Step Breakdowns with Worked Examples</p>
+  <div class="topic-badges">
+    <span class="badge">Foundations &amp; Definitions</span>
+    <span class="badge">Overhead Costing</span>
+    <span class="badge">Standard Costing</span>
+    <span class="badge">Variance Analysis</span>
+    <span class="badge">CVP Analysis</span>
+    <span class="badge">Job &amp; Contract Costing</span>
+    <span class="badge">Process Costing</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOPIC 0: FOUNDATIONS & DEFINITIONS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="foundations">
+  <div class="section-header">
+    <div class="section-num">0</div>
+    <div>
+      <h2>Foundational Concepts &amp; Definitions</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">Accounting · Cost Classification · Responsibility Centres · Cost Behaviour</p>
+    </div>
+  </div>
+
+  <!-- DEFINITION OF ACCOUNTING -->
+  <div class="def-box">
+    <div class="label">Definition — Accounting</div>
+    Accounting is the process of: <strong>Identifying → Recording → Classifying → Summarizing → Reporting → Interpreting</strong> business transactions and their effects on company affairs.
+  </div>
+
+  <!-- 5 PURPOSES -->
+  <div class="card gold">
+    <h3>The Five Main Purposes of an Accounting System</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>#</th><th>Purpose</th><th>Description</th></tr>
+        <tr><td>1</td><td><strong>Strategy &amp; Long-range Plans</strong></td><td>New product development, investments in tangible/intangible assets</td></tr>
+        <tr><td>2</td><td><strong>Resource Allocation</strong></td><td>Product/customer emphasis, pricing, profitability analysis</td></tr>
+        <tr><td>3</td><td><strong>Cost Planning &amp; Control</strong></td><td>Control of operations and activities</td></tr>
+        <tr><td>4</td><td><strong>Performance Measurement</strong></td><td>Comparing actual vs. planned results; evaluation of people</td></tr>
+        <tr><td>5</td><td><strong>External Reporting</strong></td><td>Meeting regulatory and legal requirements (IFRS, IAS compliance)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- BRANCHES OF ACCOUNTING -->
+  <div class="card">
+    <h3>Branches of Accounting</h3>
+    <div class="grid-3">
+      <div style="background:#f5f5f5; padding:1rem; border-radius:8px; border-left:4px solid var(--navy);">
+        <strong>Financial Accounting</strong>
+        <p style="margin-top:0.5rem; font-size:0.9rem;">Serves internal and external decision-makers. Two phases: <em>Book-keeping</em> (day-to-day recording from source documents) and <em>Summarising</em>.</p>
+      </div>
+      <div style="background:#f5f5f5; padding:1rem; border-radius:8px; border-left:4px solid var(--teal);">
+        <strong>Management Accounting</strong>
+        <p style="margin-top:0.5rem; font-size:0.9rem;">Preparation of financial reports for use by people <em>within</em> the firm.</p>
+      </div>
+      <div style="background:#f5f5f5; padding:1rem; border-radius:8px; border-left:4px solid var(--gold);">
+        <strong>Cost Accounting</strong>
+        <p style="margin-top:0.5rem; font-size:0.9rem;">Part of Management Accounting. Establishes budgets, standard costs, actual costs. Analyzes variances, profitability, and social use of funds.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANAGEMENT vs FINANCIAL ACCOUNTING -->
+  <div class="card navy">
+    <h3>Management Accounting vs Financial Accounting</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Criteria</th><th>Management Accounting</th><th>Financial Accounting</th></tr>
+        <tr><td>Primary users</td><td>Company managers</td><td>Outside parties</td></tr>
+        <tr><td>Time focus</td><td>Present and future</td><td>Historical</td></tr>
+        <tr><td>Organizational focus</td><td>Parts (segmented)</td><td>Whole (aggregate)</td></tr>
+        <tr><td>Time span of reports</td><td>As needed</td><td>Quarterly and annually</td></tr>
+        <tr><td>Rules and regulations</td><td>Need not follow GAAP</td><td>Must follow GAAP</td></tr>
+        <tr><td>Record-keeping</td><td>Formal and informal</td><td>Formal only</td></tr>
+        <tr><td>Type of data</td><td>Qualitative AND Quantitative</td><td>Mainly quantitative</td></tr>
+        <tr><td>Legality</td><td>Not a legal requirement</td><td>Legal requirement</td></tr>
+        <tr><td>Regulation</td><td>Not regulated</td><td>Regulated by statutes</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- COST DEFINITION -->
+  <div class="def-box">
+    <div class="label">Definition — Cost</div>
+    <strong>Cost</strong> = A sacrifice or giving up of economic resources for particular purposes, usually in exchange for goods or services.<br><br>
+    <strong>Cost vs Expense:</strong> An expense is the value of assets given up to generate revenue. Most costs eventually become expenses.<br>
+    <strong>Actual Cost</strong> = Historical cost incurred (distinguished from budgeted costs).
+  </div>
+
+  <!-- OBJECTIVES OF COST ACCOUNTING -->
+  <div class="card">
+    <h3>Objectives of Cost Accounting</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">a</div>
+        <div class="step-content">Provide management with information to assist in <strong>formulating future plans</strong> covering all organizational functions.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">b</div>
+        <div class="step-content">Express the plan financially in terms of <strong>individual responsibility</strong> for all management grades.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">c</div>
+        <div class="step-content">Report on <strong>organizational effectiveness</strong> and methods used to carry out the plan.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">d</div>
+        <div class="step-content">Express <strong>standards of performance</strong>, compare actual performance with standards, and analyze variances for control.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">e</div>
+        <div class="step-content">Report to management on the <strong>extent to which the plan has been carried out</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESPONSIBILITY CENTRES -->
+  <div class="card coral">
+    <h3>Responsibility Centres — Hierarchy (Lowest to Highest)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Centre Type</th><th>Definition</th><th>Manager Responsible For</th></tr>
+        <tr><td><strong>Cost Centre</strong></td><td>Location, function, activity, or equipment where costs are accumulated and attributed to cost units</td><td>Costs only</td></tr>
+        <tr><td><strong>Revenue Centre</strong></td><td>Part of organization that earns sales revenue</td><td>Revenue only (not costs)</td></tr>
+        <tr><td><strong>Profit Centre</strong></td><td>Part of business where both costs and revenues are identified</td><td>Both costs and revenues</td></tr>
+        <tr><td><strong>Investment Centre</strong></td><td>Profit centre with additional responsibilities for capital employed and investment decisions</td><td>Costs, revenues, AND investment decisions</td></tr>
+      </table>
+    </div>
+    <h4>Examples of Cost Centres</h4>
+    <p>A department · A machine or group of machines · A project (e.g. installing a computer system) · A new product · A person (e.g. marketing director — salary, car, expenses)</p>
+  </div>
+
+  <!-- COST UNITS & COST OBJECTS -->
+  <div class="grid-2">
+    <div class="card gold">
+      <h3>Cost Units</h3>
+      <div class="def-box" style="margin-top:0.5rem;">
+        <div class="label">Definition</div>
+        A unit of production or activity in relation to which cost is measured.
+      </div>
+      <h4>Why Measure Cost Units?</h4>
+      <ul style="padding-left:1.2rem;">
+        <li>Establish cost to produce an item or perform an activity</li>
+        <li>Measure profit or loss on an item</li>
+        <li>Value closing stocks</li>
+        <li>Compare costs with budgeted costs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Cost Object &amp; Cost Accumulation</h3>
+      <div class="def-box" style="margin-top:0.5rem;">
+        <div class="label">Cost Object</div>
+        Any activity for which a separate measurement of costs is desired (e.g. product, service, centre, activity, customer, distribution channel).
+      </div>
+      <h4>Two Basic Stages</h4>
+      <p><strong>Stage 1:</strong> Accumulate costs by natural classification (materials, labour, fuel, advertising).</p>
+      <p style="margin-top:0.5rem;"><strong>Stage 2:</strong> Assign these costs to cost objects.</p>
+      <div style="margin-top:0.75rem; display:flex; flex-wrap:wrap; gap:0.4rem;">
+        <span class="chip teal">Cost Tracing → Direct costs</span>
+        <span class="chip gold">Cost Allocation → Indirect costs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COST CLASSIFICATION -->
+  <div class="card">
+    <h3>Cost Classification — The 5 Main Categories</h3>
+    <div class="grid-3">
+      <div style="background:#f0f9f8; padding:1rem; border-radius:8px; text-align:center; border-top:3px solid var(--teal);">
+        <strong>1. By Element (Nature)</strong><br>
+        <span style="font-size:0.85rem;">Materials · Labour · Expenses</span>
+      </div>
+      <div style="background:#fff8e1; padding:1rem; border-radius:8px; text-align:center; border-top:3px solid var(--gold);">
+        <strong>2. Direct vs Indirect</strong><br>
+        <span style="font-size:0.85rem;">Traceable vs non-traceable</span>
+      </div>
+      <div style="background:#f0f0f8; padding:1rem; border-radius:8px; text-align:center; border-top:3px solid var(--navy);">
+        <strong>3. Functional</strong><br>
+        <span style="font-size:0.85rem;">Production · Admin · Selling · Distribution</span>
+      </div>
+      <div style="background:#fff0ec; padding:1rem; border-radius:8px; text-align:center; border-top:3px solid var(--coral);">
+        <strong>4. Fixed vs Variable</strong><br>
+        <span style="font-size:0.85rem;">Behaviour with activity level</span>
+      </div>
+      <div style="background:#f5f1ea; padding:1rem; border-radius:8px; text-align:center; border-top:3px solid #888;">
+        <strong>5. Other</strong><br>
+        <span style="font-size:0.85rem;">Avoidable · Sunk · Controllable</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRECT vs INDIRECT -->
+  <div class="card gold">
+    <h3>Direct vs Indirect Costs</h3>
+    <div class="grid-2">
+      <div>
+        <h4>Direct Costs</h4>
+        <p>Cost that can be <strong>traced in full</strong> to the product, service, or department. Easy to calculate; big enough to justify tracking individually.</p>
+        <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
+          <li><strong>Direct Materials</strong> — traceable material on a product (e.g. fabric for a tailor)</li>
+          <li><strong>Direct Labour</strong> — remuneration of people directly involved in production (e.g. tailor's wages)</li>
+          <li><strong>Direct Expenses</strong> — hire of special equipment for a specific job; maintenance of such equipment</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Indirect Costs (Overheads)</h4>
+        <p>Cost incurred in making a product but <strong>cannot be traced directly and in full</strong>. Cannot be economically identified with a specific saleable cost unit.</p>
+        <ul style="padding-left:1.2rem; margin-top:0.5rem; font-size:0.9rem;">
+          <li>Indirect materials (cotton waste, grease, small tools)</li>
+          <li>Indirect labour (supervisors, cleaners)</li>
+          <li>Indirect expenses (rent, depreciation, insurance)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- COST STRUCTURE / FORMULAS -->
+  <div class="card coral">
+    <h3>The Cost Structure — Key Formulas</h3>
+    <div class="formula">
+Prime Cost        = Direct Materials + Direct Labour + Direct Expenses
+
+Production Cost   = Prime Cost + Production Overheads
+
+Total Cost        = Production Cost + Selling &amp; Administration Costs
+    </div>
+    <div class="callout info" style="margin-top:1rem;">
+      <div class="icon">📊</div>
+      <div>
+        <strong>Elements of Cost Tree:</strong><br>
+        Materials (Direct + Indirect) · Labour (Direct + Indirect) · Expenses (Direct + Indirect)<br>
+        → Direct elements = <strong>Prime Cost</strong> · Indirect elements = <strong>Overheads</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIXED vs VARIABLE -->
+  <div class="card">
+    <h3>Fixed, Variable &amp; Semi-Variable Costs</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Type</th><th>Definition</th><th>Example</th><th>Total behaviour</th><th>Per unit behaviour</th></tr>
+        <tr><td><strong>Fixed</strong></td><td>Unaffected by changes in activity level within relevant range</td><td>Factory rent K94,500/yr</td><td>Constant</td><td>Decreases as output rises</td></tr>
+        <tr><td><strong>Variable</strong></td><td>Varies proportionally with the level of activity</td><td>Handlebars K52 each</td><td>Increases with output</td><td>Constant</td></tr>
+        <tr><td><strong>Semi-variable</strong></td><td>Contains both fixed and variable components</td><td>Utility bills</td><td>Increases, but not proportionally</td><td>Decreases as output rises</td></tr>
+      </table>
+    </div>
+    <div class="worked" style="margin-top:1rem;">
+      <div class="worked-title">Bicycles by Luangwa — Fixed vs Variable Cost Example</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Volume</th><th>Fixed Cost (Rent)</th><th>Variable Cost (Handlebars @K52)</th><th>Total Cost</th><th>Unit Cost</th></tr>
+          <tr><td>1,000 bikes</td><td class="num">K94,500</td><td class="num">K52,000</td><td class="num">K146,500</td><td class="num">K146.50</td></tr>
+          <tr><td>3,500 bikes</td><td class="num">K94,500</td><td class="num">K182,000</td><td class="num">K276,500</td><td class="num">K79.00</td></tr>
+        </table>
+      </div>
+      <div class="callout danger" style="margin-top:0.75rem;">
+        <div class="icon">⚠️</div>
+        <div><strong>The Danger of Using Average Unit Costs Incorrectly:</strong> If you use K146.50/unit (calculated at 1,000 units) to budget for 600 units → you get K87,900. The <em>correct</em> answer is K94,500 + (600×52) = <strong>K125,700</strong>. Never use a unit cost from one volume to estimate costs at a different volume!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT vs PERIOD COSTS -->
+  <div class="card navy">
+    <h3>Product Costs vs Period Costs</h3>
+    <div class="grid-2">
+      <div>
+        <h4>Product Cost</h4>
+        <p>Cost identified with finished product; initially part of stock value on the balance sheet. Becomes an expense <strong>only when stock is sold</strong>.</p>
+        <p style="margin-top:0.5rem; font-size:0.85rem;">= Inventoriable Cost (asset until sold)</p>
+      </div>
+      <div>
+        <h4>Period Cost</h4>
+        <p>Deducted as an expense during the current period. <strong>Never included</strong> in stock value.</p>
+        <p style="margin-top:0.5rem; font-size:0.85rem;">= Selling &amp; Admin costs, finance costs</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTHER COST CLASSIFICATIONS -->
+  <div class="card">
+    <h3>Other Cost Classifications</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Classification</th><th>Definition</th></tr>
+        <tr><td><strong>Avoidable Costs</strong></td><td>Specific costs that would be avoided if the activity/sector did not exist</td></tr>
+        <tr><td><strong>Unavoidable Costs</strong></td><td>Costs incurred whether or not the activity/sector exists</td></tr>
+        <tr><td><strong>Controllable Cost</strong></td><td>Cost that can be influenced by management decisions and actions</td></tr>
+        <tr><td><strong>Uncontrollable Cost</strong></td><td>Cost that cannot be affected by management within a given time span</td></tr>
+        <tr><td><strong>Discretionary Costs</strong></td><td>Costs incurred at manager's discretion (advertising, R&amp;D, training)</td></tr>
+        <tr><td><strong>Sunk Cost</strong></td><td>Past cost — not directly relevant in decision-making</td></tr>
+        <tr><td><strong>Committed Fixed Costs</strong></td><td>From possession of plant, equipment, buildings (depreciation, rent, admin salaries) — largely non-controllable short-term</td></tr>
+        <tr><td><strong>Opportunity Cost</strong></td><td>Value of the next best alternative foregone</td></tr>
+        <tr><td><strong>Cost Driver</strong></td><td>Activity/volume whose change causes variable costs to change proportionately</td></tr>
+        <tr><td><strong>Relevant Range</strong></td><td>Volume range within which fixed costs remain constant</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CODING SYSTEMS -->
+  <div class="card gold">
+    <h3>Coding Systems</h3>
+    <div class="def-box" style="margin-top:0.5rem;">
+      <div class="label">Definition</div>
+      A code is a "brief, accurate reference designed to assist classification of items by facilitating entry, collation and analysis."
+    </div>
+    <h4>Two-Step Process</h4>
+    <p>① Costs are <strong>classified</strong> → ② Costs are <strong>coded</strong></p>
+    <h4>Features of a Good Coding System</h4>
+    <div class="grid-2" style="margin-top:0.5rem; font-size:0.87rem;">
+      <ul style="padding-left:1.2rem;">
+        <li>Easy to use and communicate</li>
+        <li>Each item has a unique code</li>
+        <li>Expandable for growth</li>
+        <li>Flexible — small changes easily accommodated</li>
+        <li>Comprehensive — every item can be coded</li>
+        <li>Brief — saves clerical time</li>
+        <li>Enables error detection</li>
+      </ul>
+      <ul style="padding-left:1.2rem;">
+        <li>Index/reference book readily available</li>
+        <li>Regular review to remove outdated codes</li>
+        <li>Issued from a single central point</li>
+        <li>Consistent format — all numeric OR all alphabetic; no dots/dashes</li>
+        <li>Same length and structure (uniformity)</li>
+        <li>Avoids confusion (I/1, O/0, S/5)</li>
+        <li>Significant — code says something about the item</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FLOW OF COSTS -->
+  <div class="card coral">
+    <h3>Flow of Costs — Bicycles by Luangwa (Complete Example)</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Direct Materials Used</strong><br>
+          Beginning DM (K50,000) + Purchases (K180,000) − Ending DM (K30,000) = <strong>K200,000</strong>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Total Manufacturing Costs</strong><br>
+          DM Used (K200,000) + Direct Labour (K105,500) + Indirect Mfg (K194,500) = <strong>K500,000</strong>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Cost of Goods Manufactured (COGM)</strong><br>
+          Beginning WIP (K30,000) + Total Mfg Costs (K500,000) − Ending WIP (K35,000) = <strong>K495,000</strong>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Cost of Goods Sold (COGS)</strong><br>
+          Beginning FG (K10,000) + COGM (K495,000) − Ending FG (K15,000) = <strong>K490,000</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIME & CONVERSION COSTS -->
+  <div class="grid-2">
+    <div class="card">
+      <h3>Prime Costs</h3>
+      <div class="formula" style="font-size:0.85rem;">Prime Cost = Direct Materials + Direct Labour</div>
+      <p style="margin-top:0.75rem; font-size:0.9rem;">Bicycles by Luangwa: K200,000 + K105,500 = <strong>K305,000</strong></p>
+    </div>
+    <div class="card gold">
+      <h3>Conversion Costs</h3>
+      <div class="formula" style="font-size:0.85rem;">Conversion Cost = Direct Labour + Manufacturing Overhead</div>
+      <p style="margin-top:0.75rem; font-size:0.9rem;">Bicycles by Luangwa: K105,500 + K194,500 = <strong>K300,000</strong></p>
+      <p style="font-size:0.85rem; color:var(--muted);">= Costs to convert raw materials into finished goods</p>
+    </div>
+  </div>
+
+  <!-- OVERTIME PREMIUM -->
+  <div class="card navy">
+    <h3>Overtime Premium</h3>
+    <div class="def-box" style="margin-top:0.5rem; margin-bottom:0.75rem;">
+      <div class="label">Important Rule</div>
+      Overtime premium is usually considered part of <strong>overhead</strong>, not direct labour.
+    </div>
+    <div class="worked">
+      <div class="worked-title">Example: Worker @ K18/hr straight time, time-and-a-half for overtime, works 44 hrs (40 regular + 4 OT)</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Component</th><th>Calculation</th><th class="num">Amount (K)</th></tr>
+          <tr><td>Direct labour (all hours @ base rate)</td><td>44 hrs × K18</td><td class="num">792</td></tr>
+          <tr><td>Overtime premium</td><td>4 hrs × K9 (= 18 × 50%)</td><td class="num">36</td></tr>
+          <tr class="total-row"><td><strong>Total gross earnings</strong></td><td></td><td class="num"><strong>828</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY FORMULAS SUMMARY -->
+  <div class="card gold">
+    <h3>Summary of Key Formulas</h3>
+    <div class="formula">
+Prime Cost              = Direct Materials + Direct Labour + Direct Expenses
+Production/Factory Cost = Prime Cost + Overheads
+Total Cost              = Production Cost + Selling &amp; Administration Costs
+
+Direct Materials Used   = Beginning DM Inventory + Purchases − Ending DM Inventory
+Total Manufacturing Costs = DM Used + Direct Labour + Manufacturing Overhead
+COGM                    = Beginning WIP + Total Manufacturing Costs − Ending WIP
+COGS                    = Beginning Finished Goods + COGM − Ending Finished Goods
+Conversion Cost         = Direct Labour + Manufacturing Overhead
+    </div>
+  </div>
+
+  <!-- GLOSSARY -->
+  <div class="card">
+    <h3>Key Terms Glossary</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Actual Cost</td><td>Historical cost incurred</td></tr>
+        <tr><td>Budgeted Cost</td><td>Forecasted/planned cost</td></tr>
+        <tr><td>Cost Object</td><td>Anything for which separate cost measurement is desired</td></tr>
+        <tr><td>Cost Driver</td><td>Activity/volume whose change causes variable costs to change proportionately</td></tr>
+        <tr><td>Relevant Range</td><td>Volume range where fixed costs remain constant</td></tr>
+        <tr><td>Sunk Cost</td><td>Past cost not relevant for decision-making</td></tr>
+        <tr><td>Opportunity Cost</td><td>Value of next best alternative foregone</td></tr>
+        <tr><td>Cost Centre</td><td>Location/function where costs are accumulated</td></tr>
+        <tr><td>Cost Unit</td><td>Unit of production/activity for cost measurement</td></tr>
+        <tr><td>Cost Tracing</td><td>Assigning direct costs to a chosen cost object</td></tr>
+        <tr><td>Cost Allocation</td><td>Assigning indirect costs to a chosen cost object</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════
+     TOPIC 1: OVERHEAD COSTING
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="overheads">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div>
+      <h2>Overhead Costing</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">Allocation → Apportionment → Re-apportionment → Absorption</p>
+    </div>
+  </div>
+
+  <!-- DEFINITION -->
+  <div class="def-box">
+    <div class="label">Definition</div>
+    <strong>An overhead</strong> is a cost incurred in making a product, providing a service or running a department that <em>cannot</em> be traced directly and in full to the product, service, or department.
+  </div>
+
+  <div class="grid-2">
+    <div class="card gold">
+      <h3>Components of Overhead</h3>
+      <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+        <li><strong>Indirect Materials</strong> – e.g. cleaning supplies, lubricants</li>
+        <li><strong>Indirect Labour</strong> – e.g. supervisors, maintenance staff</li>
+        <li><strong>Indirect Expenses</strong> – e.g. factory rent, insurance</li>
+      </ul>
+    </div>
+    <div class="card navy">
+      <h3>Classification by Function</h3>
+      <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+        <li><strong>Production overheads</strong> – factory floor costs</li>
+        <li><strong>Administration overheads</strong> – office running costs</li>
+        <li><strong>Selling &amp; distribution</strong> – delivery, marketing costs</li>
+      </ul>
+      <h4>Sources</h4>
+      <p>Material requisitions · Wages analysis book · Vouchers &amp; invoices</p>
+    </div>
+  </div>
+
+  <!-- PROCEDURE FLOW -->
+  <div class="card">
+    <h3>The 8-Step Overhead Costing Procedure</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Establish Cost Centres</strong><br>
+          Identify <em>Production cost centres</em> (where cost units are made) and <em>Service cost centres</em> (support departments: stores, canteen, maintenance).</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Collect Overheads</strong><br>
+          Gather all overhead costs from sources: wages book, invoices, requisitions.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Allocation</strong><br>
+          Charge <em>whole cost items directly</em> to a cost centre when that centre is the sole cause. E.g. indirect wages of Dept A go entirely to Dept A.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Apportionment (Primary)</strong><br>
+          Share general costs across cost centres on a <em>fair basis</em> (e.g. rent split by floor area).</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-content"><strong>Re-apportionment (Secondary)</strong><br>
+          Transfer service cost centre totals into production cost centres (because no cost units pass through service centres).</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">6</div>
+        <div class="step-content"><strong>Calculate OAR</strong><br>
+          <span style="font-family:'IBM Plex Mono',monospace; background:#f5f5f5; padding:2px 6px; border-radius:4px;">OAR = Budgeted Overhead ÷ Budgeted Activity Level</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">7</div>
+        <div class="step-content"><strong>Absorb Overheads into Cost Units</strong><br>
+          Multiply OAR × actual activity (labour hours or machine hours) to charge overheads to products.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">8</div>
+        <div class="step-content"><strong>Calculate Over/Under Absorption</strong><br>
+          Compare overhead absorbed (OAR × actual activity) with actual overhead incurred.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPORTIONMENT BASES -->
+  <div class="card gold">
+    <h3>Apportionment Bases — Quick Reference</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Overhead Type</th><th>Basis of Apportionment</th></tr>
+        <tr><td>Rent, rates, heating, lighting, building depreciation</td><td>Floor area (m²) occupied</td></tr>
+        <tr><td>Plant depreciation &amp; insurance</td><td>Book value (cost) of equipment</td></tr>
+        <tr><td>Personnel, canteen, wages office, first aid</td><td>Number of employees</td></tr>
+        <tr><td>Heating (volume-based)</td><td>Volume of space occupied</td></tr>
+        <tr><td>Power</td><td>Horsepower of machines</td></tr>
+        <tr><td>Stock insurance</td><td>Average stock value</td></tr>
+        <tr><td>NAPSA / social security</td><td>Number of employees</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- WORKED EXAMPLE: ENCRYPTION INC -->
+  <div class="worked">
+    <div class="worked-title">Worked Example — Encryption Inc. Overhead Analysis Sheet</div>
+    <p style="margin-bottom:1rem;">Three production departments (Federal, International, Private) + two service departments (Engineering, Stores).</p>
+    <h4 style="color:var(--teal); font-family:'IBM Plex Mono',monospace; font-size:0.85rem; margin-bottom:0.5rem;">STEP A — ALLOCATION &amp; APPORTIONMENT</h4>
+    <div class="tbl-wrap">
+      <table>
+        <tr>
+          <th>Overhead</th><th>Basis</th>
+          <th class="num">Federal (K)</th><th class="num">Intl (K)</th><th class="num">Private (K)</th><th class="num">Eng (K)</th><th class="num">Stores (K)</th><th class="num">Total (K)</th>
+        </tr>
+        <tr><td>Indirect wages</td><td>Allocation</td><td class="num">4,000</td><td class="num">3,000</td><td class="num">3,500</td><td class="num">2,500</td><td class="num">1,500</td><td class="num">14,500</td></tr>
+        <tr><td>NAPSA</td><td>No. workers (20:12:15:7:6)</td><td class="num">260</td><td class="num">156</td><td class="num">195</td><td class="num">91</td><td class="num">78</td><td class="num">780</td></tr>
+        <tr><td>Rent &amp; Rates</td><td>Area (10k:8k:7k:3k:2k)</td><td class="num">200</td><td class="num">160</td><td class="num">140</td><td class="num">60</td><td class="num">40</td><td class="num">600</td></tr>
+        <tr><td>Plant Repairs</td><td>Book value (10k:12k:5k:2k:1k)</td><td class="num">200</td><td class="num">240</td><td class="num">100</td><td class="num">40</td><td class="num">20</td><td class="num">600</td></tr>
+        <tr><td>Plant Depreciation</td><td>Book value</td><td class="num">150</td><td class="num">180</td><td class="num">75</td><td class="num">30</td><td class="num">15</td><td class="num">450</td></tr>
+        <tr><td>Heat &amp; Light</td><td>Area</td><td class="num">100</td><td class="num">80</td><td class="num">70</td><td class="num">30</td><td class="num">20</td><td class="num">300</td></tr>
+        <tr><td>Power</td><td>Horsepower (120:95:55:10:0)</td><td class="num">240</td><td class="num">190</td><td class="num">110</td><td class="num">20</td><td class="num">0</td><td class="num">560</td></tr>
+        <tr><td>Stock Insurance</td><td>Avg stock (2k:1.5k:1.5k)</td><td class="num">140</td><td class="num">105</td><td class="num">105</td><td class="num">0</td><td class="num">0</td><td class="num">350</td></tr>
+        <tr><td>Medical</td><td>No. workers</td><td class="num">7</td><td class="num">4</td><td class="num">5</td><td class="num">2</td><td class="num">2</td><td class="num">20</td></tr>
+        <tr class="total-row"><td><strong>TOTAL</strong></td><td></td><td class="num"><strong>5,297</strong></td><td class="num"><strong>4,115</strong></td><td class="num"><strong>4,300</strong></td><td class="num"><strong>2,773</strong></td><td class="num"><strong>1,675</strong></td><td class="num"><strong>18,160</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- RE-APPORTIONMENT METHODS -->
+  <div class="card coral">
+    <h3>Re-apportionment: 4 Methods Compared</h3>
+    <div class="def-box" style="margin-top:0.5rem;">
+      <div class="label">Why re-apportion?</div>
+      No cost units pass through service departments (Stores, Engineering), so their costs must be transferred to production departments.
+    </div>
+    <div class="method-grid">
+      <div class="method-box">
+        <h4>① Direct Method</h4>
+        <p>Ignores any inter-service dealings. Service centre costs split only between production departments.</p>
+        <span class="chip teal" style="margin-top:0.5rem;">Simplest</span>
+      </div>
+      <div class="method-box">
+        <h4>② Step-Down Method</h4>
+        <p>One service centre is closed first (apportioned to all remaining), then the next. Order of closing affects results.</p>
+        <span class="chip gold">Moderate</span>
+      </div>
+      <div class="method-box">
+        <h4>③ Repetitive Method</h4>
+        <p>Repeatedly cycles through service centres until remaining balances become negligible.</p>
+        <span class="chip" style="background:var(--teal);">Iterative</span>
+      </div>
+      <div class="method-box">
+        <h4>④ Simultaneous Equations</h4>
+        <p>Sets up algebraic equations recognising full inter-service dealings. Most accurate.</p>
+        <span class="chip coral">Most Precise</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRECT METHOD WORKED -->
+  <div class="worked">
+    <div class="worked-title">Re-apportionment — Direct Method</div>
+    <p style="margin-bottom:0.75rem; font-size:0.9rem;">Stores re-apportioned using material requisitions ratio (Federal:International:Private = 30k:30k:20k → 3:3:2). Engineering using engineering hours (5k:3k:1k → 5:3:1).</p>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th></th><th class="num">Federal</th><th class="num">Intl</th><th class="num">Private</th><th class="num">Engineering</th><th class="num">Stores</th></tr>
+        <tr><td>After primary apportionment</td><td class="num">5,297</td><td class="num">4,115</td><td class="num">4,300</td><td class="num">2,773</td><td class="num">1,675</td></tr>
+        <tr><td>Stores → (3:3:2)</td><td class="num">+628</td><td class="num">+629</td><td class="num">+418</td><td class="num">–</td><td class="num">(1,675)</td></tr>
+        <tr><td>Engineering → (5:3:1)</td><td class="num">+1,541</td><td class="num">+924</td><td class="num">+308</td><td class="num">(2,773)</td><td class="num">–</td></tr>
+        <tr class="total-row"><td><strong>TOTAL</strong></td><td class="num"><strong>7,466</strong></td><td class="num"><strong>5,668</strong></td><td class="num"><strong>5,026</strong></td><td class="num"><strong>0</strong></td><td class="num"><strong>0</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SIMULTANEOUS EQUATIONS -->
+  <div class="worked">
+    <div class="worked-title">Re-apportionment — Simultaneous Equations</div>
+    <p style="margin-bottom:0.75rem; font-size:0.9rem;">Stores receives 10% of Engineering costs. Engineering receives 20% of Stores costs.</p>
+    <div class="formula">
+Let X = Stores total (after receiving from Engineering)
+Let Y = Engineering total (after receiving from Stores)
+
+X = 1,675 + 0.1Y
+Y = 2,773 + 0.2X
+
+→ Rearranging:
+  x − 0.1y = 1,675
+  −x + 5y = 13,865
+  ─────────────────
+  4.9y = 15,540
+  Y = 3,171    X = 1,992
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th></th><th class="num">Federal</th><th class="num">Intl</th><th class="num">Private</th></tr>
+        <tr><td>Primary overheads</td><td class="num">5,297</td><td class="num">4,115</td><td class="num">4,300</td></tr>
+        <tr><td>Stores X=1,992 (30%:30%:20%)</td><td class="num">+597.6</td><td class="num">+597.6</td><td class="num">+398.4</td></tr>
+        <tr><td>Engineering Y=3,171 (50%:30%:10%)</td><td class="num">+1,585.5</td><td class="num">+951.3</td><td class="num">+317.1</td></tr>
+        <tr class="total-row"><td><strong>TOTAL</strong></td><td class="num"><strong>7,480.1</strong></td><td class="num"><strong>5,663.9</strong></td><td class="num"><strong>5,015.5</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- OAR SECTION -->
+  <div class="card">
+    <h3>Overhead Absorption Rate (OAR)</h3>
+    <div class="formula">OAR = Total Budgeted Overhead ÷ Total Budgeted Level of Activity</div>
+    <h4>Absorption Bases</h4>
+    <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+      <span class="chip">Units produced</span>
+      <span class="chip teal">Labour hours</span>
+      <span class="chip gold">Machine hours</span>
+      <span class="chip">Prime cost %</span>
+      <span class="chip">Material cost %</span>
+      <span class="chip">Direct wages %</span>
+    </div>
+    <div class="callout">
+      <div class="icon">⚠️</div>
+      <div>Only <strong>one</strong> OAR is used per cost centre. Choose the activity that is <strong>highest in volume</strong> and the main driver of overheads.</div>
+    </div>
+
+    <div class="worked" style="margin-top:1rem;">
+      <div class="worked-title">OAR Calculation — All 6 Bases (Budgeted OH = K250,000)</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Basis</th><th>Calculation</th><th>OAR</th></tr>
+          <tr><td>Units produced (25,000)</td><td>250,000 ÷ 25,000</td><td><strong>K10 per unit</strong></td></tr>
+          <tr><td>Prime cost (K500,000)</td><td>250,000 ÷ 500,000 × 100</td><td><strong>50% of prime cost</strong></td></tr>
+          <tr><td>Material cost (K300,000)</td><td>250,000 ÷ 300,000 × 100</td><td><strong>83.3% of materials</strong></td></tr>
+          <tr><td>Direct wages (K200,000)</td><td>250,000 ÷ 200,000 × 100</td><td><strong>125% of wages</strong></td></tr>
+          <tr><td>Labour hours (12,500)</td><td>250,000 ÷ 12,500</td><td><strong>K20 per LH</strong></td></tr>
+          <tr><td>Machine hours (10,000)</td><td>250,000 ÷ 10,000</td><td><strong>K25 per MH</strong></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="worked" style="margin-top:1rem;">
+      <div class="worked-title">Encryption Inc. — Predetermined OARs</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th></th><th>Federal</th><th>International</th><th>Private</th></tr>
+          <tr><td>Budgeted Overheads</td><td class="num">K8,000</td><td class="num">K6,000</td><td class="num">K4,500</td></tr>
+          <tr><td>Activity basis</td><td>Labour hrs (16,000)</td><td>Labour hrs (3,000)</td><td>Machine hrs (2,000)</td></tr>
+          <tr class="highlight"><td><strong>OAR</strong></td><td class="num"><strong>K0.50 / LH</strong></td><td class="num"><strong>K2.00 / LH</strong></td><td class="num"><strong>K2.25 / MH</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVER/UNDER ABSORPTION -->
+  <div class="card coral">
+    <h3>Over / Under Absorption</h3>
+    <div class="grid-2">
+      <div>
+        <h4>Over Absorption</h4>
+        <p>Overhead <em>absorbed</em> (OAR × actual activity) <strong>&gt;</strong> actual overhead incurred.<br>
+        → Overcharged to products → Credit to P&amp;L (profit increase)</p>
+      </div>
+      <div>
+        <h4>Under Absorption</h4>
+        <p>Overhead absorbed <strong>&lt;</strong> actual overhead incurred.<br>
+        → Undercharged to products → Debit to P&amp;L (profit decrease)</p>
+      </div>
+    </div>
+    <div class="formula">
+Over/Under Absorption = (OAR × Actual Activity) − Actual Overhead Incurred
+
+Positive = Over-absorption | Negative = Under-absorption
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════
+     TOPIC 2: STANDARD COSTING
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="standard-costing">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div>
+      <h2>Standard Costing</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">Planned costs · Standard cost cards · Types of standards</p>
+    </div>
+  </div>
+
+  <div class="def-box">
+    <div class="label">Definition</div>
+    <strong>Standard costing</strong> is the preparation of standard costs to value inventories/cost products and/or to use in variance analysis — a key management control tool. (CIMA)
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Two Principal Uses</h3>
+      <h4>① Inventory Valuation</h4>
+      <p>Alternative method to FIFO/LIFO for valuing inventories and costing production.</p>
+      <h4>② Control Tool</h4>
+      <p>Establishes planned costs, then uses variance analysis to highlight activities not conforming to plan — alerts management to areas needing corrective action.</p>
+    </div>
+    <div class="card gold">
+      <h3>Standard Cost Card</h3>
+      <p>Shows the full planned cost breakdown per unit. Built from:</p>
+      <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+        <li>Standard material quantities × standard prices</li>
+        <li>Standard labour hours × standard rates</li>
+        <li>Standard variable overhead rates</li>
+        <li>Standard fixed overhead absorption rates</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TYPES OF STANDARDS -->
+  <div class="card">
+    <h3>Types of Standards — At a Glance</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Type</th><th>Description</th><th>Motivational Impact</th></tr>
+        <tr><td><strong>Ideal</strong></td><td>Based on perfect conditions — no waste, no idle time, no breakdowns</td><td>❌ Unfavourable — goals feel unattainable</td></tr>
+        <tr><td><strong>Attainable</strong></td><td>Efficient but not perfect — allows for some waste, fatigue, breakdowns</td><td>✅ Best — useful psychological incentive</td></tr>
+        <tr><td><strong>Current</strong></td><td>Based on current working conditions including present inefficiencies</td><td>⚠️ No improvement incentive</td></tr>
+        <tr><td><strong>Basic</strong></td><td>Unchanged over long periods — used to track efficiency trends</td><td>⚠️ Least useful, may be outdated</td></tr>
+        <tr><td><strong>Loose</strong></td><td>Easily achieved with little effort</td><td>❌ Not challenging</td></tr>
+        <tr><td><strong>Historical</strong></td><td>Based on last period's actual results</td><td>❌ Not motivating — perpetuates past inefficiency</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card coral">
+    <h3>Problems in Setting Standards</h3>
+    <div class="grid-2">
+      <ul style="padding-left:1.2rem;">
+        <li>Deciding how to incorporate inflation</li>
+        <li>Agreeing on performance standard (attainable vs ideal)</li>
+        <li>Deciding on quality of materials (cost vs wastage trade-off)</li>
+        <li>Estimating prices with seasonal variation or bulk discounts</li>
+      </ul>
+      <ul style="padding-left:1.2rem;">
+        <li>Time required to construct accurate standards</li>
+        <li>Cost of setting up and maintaining the system</li>
+        <li>Behavioural problems — managers resisting for fear of blame</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WORKED EXAMPLE: MCK LTD STANDARD COST CARD -->
+  <div class="worked">
+    <div class="worked-title">MCK Ltd — Standard Cost Card (Budgeted output 5,100 units)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Cost Element</th><th>Workings</th><th class="num">Per Unit (K)</th></tr>
+        <tr><td>Direct Materials</td><td>2,550 kg ÷ 5,100 units = 0.5 kg/unit × (102,000 ÷ 2,550) = K40/kg</td><td class="num">20.00</td></tr>
+        <tr><td>Direct Labour</td><td>10,200 hrs ÷ 5,100 = 2 hrs/unit × (204,000 ÷ 10,200) = K20/hr</td><td class="num">40.00</td></tr>
+        <tr><td>Variable Overheads</td><td>30,600 ÷ 5,100 units</td><td class="num">6.00</td></tr>
+        <tr><td>Fixed Overheads</td><td>377,400 ÷ 5,100 units = K74/unit (absorbed on units)</td><td class="num">74.00</td></tr>
+        <tr class="total-row"><td><strong>Total Standard Cost</strong></td><td></td><td class="num"><strong>140.00</strong></td></tr>
+        <tr class="highlight"><td><strong>Selling Price (30% margin)</strong></td><td>140 ÷ 0.70</td><td class="num"><strong>200.00</strong></td></tr>
+      </table>
+    </div>
+    <div class="callout info" style="margin-top:1rem;">
+      <div class="icon">💡</div>
+      <div>Selling price with a <strong>30% margin</strong> means cost = 70% of selling price. So SP = 140 ÷ 0.70 = <strong>K200</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════
+     TOPIC 3: VARIANCE ANALYSIS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="variance">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div>
+      <h2>Variance Analysis</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">Material · Labour · Overhead · Sales variances</p>
+    </div>
+  </div>
+
+  <div class="def-box">
+    <div class="label">Key Definitions</div>
+    <strong>Variance</strong> = Difference between a planned/standard cost and the actual cost incurred.<br>
+    <strong>Adverse (A)</strong> = Actual worse than standard (costs higher OR revenue lower than planned).<br>
+    <strong>Favourable (F)</strong> = Actual better than standard.
+  </div>
+
+  <!-- VARIANCE TREE -->
+  <div class="card">
+    <h3>The Variance Tree — Total Cost Breakdown</h3>
+    <div class="vtree">
+      <div class="vtree-root">TOTAL COST VARIANCE</div>
+      <div class="vtree-level" style="margin-bottom:1.5rem;">
+        <div class="vtree-node">Direct Material Total Variance</div>
+        <div class="vtree-node">Direct Labour Total Variance</div>
+        <div class="vtree-node">Variable OH Total Variance</div>
+        <div class="vtree-node coral-node">Fixed OH Total Variance</div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <!-- Material sub-tree -->
+      <div style="text-align:center;">
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--teal); margin-bottom:0.5rem;">MATERIAL TOTAL splits into:</p>
+        <div style="display:flex; gap:0.75rem; justify-content:center;">
+          <div class="vtree-node gold-node" style="min-width:120px;">Price Variance</div>
+          <div class="vtree-node gold-node" style="min-width:120px;">Usage Variance</div>
+        </div>
+      </div>
+      <!-- Labour sub-tree -->
+      <div style="text-align:center;">
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--teal); margin-bottom:0.5rem;">LABOUR TOTAL splits into:</p>
+        <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+          <div class="vtree-node" style="min-width:100px;">Rate Variance</div>
+          <div class="vtree-node" style="min-width:110px;">Efficiency Variance</div>
+          <div class="vtree-node coral-node" style="min-width:100px;">Idle Time Variance</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:1rem;">
+      <div style="text-align:center;">
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--teal); margin-bottom:0.5rem;">VARIABLE OH splits into:</p>
+        <div style="display:flex; gap:0.75rem; justify-content:center;">
+          <div class="vtree-node gold-node" style="min-width:120px;">Expenditure Variance</div>
+          <div class="vtree-node gold-node" style="min-width:120px;">Efficiency Variance</div>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <p style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--teal); margin-bottom:0.5rem;">FIXED OH splits into:</p>
+        <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+          <div class="vtree-node coral-node" style="min-width:110px;">Expenditure Variance</div>
+          <div class="vtree-node coral-node" style="min-width:100px;">Volume Variance</div>
+        </div>
+        <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; margin-top:0.5rem;">
+          <div class="vtree-node" style="min-width:120px; background:#555;">Efficiency Variance</div>
+          <div class="vtree-node" style="min-width:120px; background:#555;">Capacity Variance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL VARIANCE FORMULAS -->
+  <div class="card gold">
+    <h3>All Variance Formulas</h3>
+    <h4>Material Variances</h4>
+    <div class="formula">
+Material Price Variance  = (Standard Price − Actual Price) × Actual Qty purchased/used
+Material Usage Variance  = (Standard Qty for actual output − Actual Qty) × Standard Price
+Material Total Variance  = Price Variance + Usage Variance
+    </div>
+    <h4>Labour Variances</h4>
+    <div class="formula">
+Labour Rate Variance       = (Standard Rate − Actual Rate) × Actual Hours Paid
+Labour Efficiency Variance = (Standard Hours for actual output − Actual Hours Worked) × Standard Rate
+Labour Idle Time Variance  = Idle Hours × Standard Rate   [Always ADVERSE]
+Labour Total Variance      = Rate + Efficiency (+ Idle Time) Variances
+    </div>
+    <h4>Variable Overhead Variances</h4>
+    <div class="formula">
+Var OH Expenditure Variance  = (Std Rate × Actual Hours) − Actual Variable OH
+Var OH Efficiency Variance   = (Std Hours − Actual Active Hours) × Std Variable OH Rate
+Var OH Total Variance        = (Std OH for actual output) − Actual Variable OH
+    </div>
+    <h4>Fixed Overhead Variances</h4>
+    <div class="formula">
+Fixed OH Total Variance        = (Std Fixed OH/unit × Actual units) − Actual Fixed OH
+Fixed OH Expenditure Variance  = Budgeted Fixed OH − Actual Fixed OH
+Fixed OH Volume Variance       = (Actual units − Budgeted units) × Std Fixed OH/unit
+Fixed OH Efficiency Variance   = (Std Hours − Actual Hours) × Budgeted Fixed OH Rate  [= (SH−AH) × BFOH]
+Fixed OH Capacity Variance     = (Actual Hours − Budgeted Hours) × BFOH Rate  [= (AH−BH) × BFOH]
+    </div>
+    <h4>Sales Variances</h4>
+    <div class="formula">
+Sales Price Variance   = (Actual SP − Standard SP) × Actual units sold
+Sales Volume Variance  = (Actual units sold − Budgeted units) × Standard contribution/gross margin
+    </div>
+  </div>
+
+  <!-- MCK LTD WORKED SOLUTION -->
+  <div class="worked">
+    <div class="worked-title">MCK Ltd — Full Variance Calculations (Actual: 4,850 units produced)</div>
+
+    <h4 style="color:var(--navy); margin:1rem 0 0.5rem;">Given Data Summary</h4>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Item</th><th>Budget/Standard</th><th>Actual</th></tr>
+        <tr><td>Output (units)</td><td>5,100</td><td>4,850</td></tr>
+        <tr><td>Material</td><td>0.5 kg/unit @ K40/kg</td><td>2,300 kg @ K98,900 (= K43/kg)</td></tr>
+        <tr><td>Labour</td><td>2 hrs/unit @ K20/hr</td><td>8,000 hrs @ K162,000 (= K20.25/hr)</td></tr>
+        <tr><td>Variable OH</td><td>K6/unit (K30,600 ÷ 5,100)</td><td>K26,000</td></tr>
+        <tr><td>Fixed OH</td><td>K74/unit (K377,400 ÷ 5,100)</td><td>K423,000</td></tr>
+        <tr><td>Selling Price</td><td>K200/unit</td><td>–</td></tr>
+      </table>
+    </div>
+
+    <h4 style="color:var(--navy); margin:1.25rem 0 0.5rem;">1. Total Cost Variance</h4>
+    <div class="formula">
+Standard cost of actual output = 4,850 × K140 = K679,000
+Actual total cost = 98,900 + 162,000 + 26,000 + 423,000 = K709,900
+Total Cost Variance = 679,000 − 709,900 = K30,900 ADVERSE
+    </div>
+
+    <h4 style="color:var(--navy); margin:1.25rem 0 0.5rem;">2 &amp; 3. Material Variances</h4>
+    <div class="formula">
+Standard Qty for actual output = 4,850 × 0.5 = 2,425 kg
+
+Material Price Variance = (K40 − K43*) × 2,300 kg = −K6,900 ADVERSE
+  *Actual price = 98,900 ÷ 2,300 = K43/kg
+
+Material Usage Variance = (2,425 − 2,300) × K40 = 125 × 40 = K5,000 FAVOURABLE
+
+Material Total Variance = −6,900 + 5,000 = K1,900 ADVERSE
+    </div>
+
+    <h4 style="color:var(--navy); margin:1.25rem 0 0.5rem;">4 &amp; 5 &amp; 6. Labour Variances</h4>
+    <div class="formula">
+Standard hours for actual output = 4,850 × 2 = 9,700 hrs
+Actual hours paid = 8,000 hrs  |  Actual rate = 162,000 ÷ 8,000 = K20.25/hr
+
+Labour Rate Variance = (K20 − K20.25) × 8,000 = −K2,000 ADVERSE
+
+Labour Efficiency Variance = (9,700 − 8,000) × K20 = 1,700 × 20 = K34,000 FAVOURABLE
+
+Labour Total Variance = −2,000 + 34,000 = K32,000 FAVOURABLE
+    </div>
+
+    <h4 style="color:var(--navy); margin:1.25rem 0 0.5rem;">7 &amp; 8 &amp; 9. Variable OH Variances</h4>
+    <div class="formula">
+Std Variable OH for actual output = 4,850 × K6 = K29,100
+Std rate per labour hour = K6 × 5,100 / 10,200 = K3/LH
+  (Alternatively: 30,600 ÷ 10,200 hrs = K3/hr)
+
+Variable OH Total Variance = 29,100 − 26,000 = K3,100 FAVOURABLE
+
+Var OH Expenditure Variance = (K3 × 8,000) − K26,000 = 24,000 − 26,000 = K2,000 ADVERSE
+
+Var OH Efficiency Variance = (9,700 − 8,000) × K3 = 1,700 × 3 = K5,100 FAVOURABLE
+    </div>
+
+    <h4 style="color:var(--navy); margin:1.25rem 0 0.5rem;">10 &amp; 11 &amp; 12. Fixed OH Variances</h4>
+    <div class="formula">
+Fixed OH/unit = K377,400 ÷ 5,100 = K74/unit
+BFOH rate/hr = K377,400 ÷ 10,200 hrs = K37/hr
+Budgeted hours = 5,100 × 2 = 10,200
+
+Fixed OH Total Variance = (4,850 × K74) − K423,000 = 358,900 − 423,000 = K64,100 ADVERSE
+
+Fixed OH Expenditure Variance = K377,400 − K423,000 = K45,600 ADVERSE
+
+Fixed OH Volume Variance = (4,850 − 5,100) × K74 = −250 × 74 = K18,500 ADVERSE
+
+Fixed OH Efficiency Variance = (SH − AH) × BFOH rate = (9,700 − 8,000) × K37 = K62,900 FAVOURABLE
+
+Fixed OH Capacity Variance = (AH − BH) × BFOH rate = (8,000 − 10,200) × K37 = K81,400 ADVERSE
+    </div>
+
+    <h4 style="color:var(--navy); margin:1.25rem 0 0.5rem;">Reconciliation Statement</h4>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th colspan="2">OPERATING STATEMENT — RECONCILIATION</th><th class="num">K</th></tr>
+        <tr><td colspan="2">Budgeted Profit (5,100 × (K200−K140))</td><td class="num">306,000</td></tr>
+        <tr><td colspan="3" style="background:#f5f5f5; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--muted);">VARIANCES — Favourable (F) / Adverse (A)</td></tr>
+        <tr><td>Material Price</td><td>A</td><td class="num">(6,900)</td></tr>
+        <tr><td>Material Usage</td><td>F</td><td class="num">5,000</td></tr>
+        <tr><td>Labour Rate</td><td>A</td><td class="num">(2,000)</td></tr>
+        <tr><td>Labour Efficiency</td><td>F</td><td class="num">34,000</td></tr>
+        <tr><td>Var OH Expenditure</td><td>A</td><td class="num">(2,000)</td></tr>
+        <tr><td>Var OH Efficiency</td><td>F</td><td class="num">5,100</td></tr>
+        <tr><td>Fixed OH Expenditure</td><td>A</td><td class="num">(45,600)</td></tr>
+        <tr><td>Fixed OH Volume</td><td>A</td><td class="num">(18,500)</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>Actual Profit</strong></td><td class="num"><strong>275,100</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- INTER-RELATIONSHIPS -->
+  <div class="card navy">
+    <h3>Inter-relationships Between Variances</h3>
+    <p style="margin-bottom:1rem;">When two variances are <strong>interdependent</strong>, one is usually adverse and the other favourable. Never analyse a variance in isolation.</p>
+    <div class="grid-2">
+      <div>
+        <h4>Materials Price &amp; Usage</h4>
+        <p>Cheaper material → favourable price but adverse usage (more waste). Expensive material → adverse price but favourable usage.</p>
+      </div>
+      <div>
+        <h4>Labour Rate &amp; Efficiency</h4>
+        <p>Skilled (expensive) workers → adverse rate but favourable efficiency. Cheap inexperienced workers → favourable rate but adverse efficiency.</p>
+      </div>
+      <div>
+        <h4>Sales Price &amp; Volume</h4>
+        <p>Price cut → adverse price variance but favourable volume. Price rise → favourable price but adverse volume.</p>
+      </div>
+      <div>
+        <h4>Cost &amp; Sales Volume</h4>
+        <p>Cheap materials → adverse sales volume (customers avoid lower quality). Better quality → adverse cost variances but favourable sales volume.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════
+     TOPIC 4: CVP ANALYSIS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="cvp">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div>
+      <h2>CVP Analysis</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">Breakeven · Contribution · P/V Ratio · Margin of Safety</p>
+    </div>
+  </div>
+
+  <div class="def-box">
+    <div class="label">Definition</div>
+    <strong>CVP Analysis</strong> is the study of the interrelationships between costs, volume and profit at various levels of activity. It helps answer: What volume to break even? What volume to earn a target profit? How do price changes affect profits?
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3>Contribution</h3>
+      <div class="formula" style="font-size:0.85rem;">Contribution = Sales − Variable Costs</div>
+      <p>Contribution per unit = SP − Variable cost per unit. When contribution &gt; fixed costs → profit.</p>
+    </div>
+    <div class="card gold">
+      <h3>Breakeven Point</h3>
+      <div class="formula" style="font-size:0.85rem;">BEP (units) = Fixed Costs ÷ Contribution per unit
+
+BEP (value) = BEP units × Selling Price</div>
+    </div>
+    <div class="card coral">
+      <h3>Target Profit</h3>
+      <div class="formula" style="font-size:0.85rem;">Units needed = (Fixed Costs + Target Profit) ÷ Contribution per unit</div>
+    </div>
+  </div>
+
+  <!-- P/V RATIO -->
+  <div class="card">
+    <h3>Profit/Volume (P/V) Ratio — Also called C/S Ratio</h3>
+    <div class="formula">
+P/V Ratio = (Contribution ÷ Sales) × 100
+
+Also:  Change in Contribution / Change in Sales × 100
+Or:    Change in Profit / Change in Sales × 100
+
+→ Total Contribution = P/V Ratio × Sales
+→ Profit = (P/V Ratio × Sales) − Fixed Costs
+→ Fixed Costs = (P/V Ratio × Sales) − Profit
+→ BEP in value = Fixed Costs ÷ P/V Ratio
+    </div>
+  </div>
+
+  <!-- CVP ASSUMPTIONS -->
+  <div class="card navy">
+    <h3>CVP Assumptions</h3>
+    <div class="grid-2">
+      <ul style="padding-left:1.2rem;">
+        <li>Costs and revenues are <strong>linear</strong> throughout the relevant range</li>
+        <li>All costs classified accurately as fixed or variable</li>
+        <li>Selling price <strong>constant</strong> at all levels of output</li>
+        <li>Variable cost <strong>constant</strong> per unit</li>
+      </ul>
+      <ul style="padding-left:1.2rem;">
+        <li>Fixed costs constant at all output levels</li>
+        <li>Units produced = units sold (no closing inventory)</li>
+        <li>Constant sales mix (for multi-product companies)</li>
+        <li>Only <strong>volume</strong> causes cost changes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CVP LIMITATIONS -->
+  <div class="card coral">
+    <h3>Limitations of CVP Analysis</h3>
+    <ul style="padding-left:1.2rem;">
+      <li>Only applies to a single product or fixed mix of products</li>
+      <li>Breakeven charts can be time-consuming to prepare</li>
+      <li>Assumes fixed costs are constant at all output levels</li>
+      <li>Assumes variable costs are the same per unit always</li>
+      <li>Assumes sales prices are constant at all levels</li>
+      <li>Ignores uncertainty in cost estimates</li>
+      <li>Ignores inventory level changes</li>
+    </ul>
+  </div>
+
+  <!-- WORKED EXAMPLES -->
+  <div class="worked">
+    <div class="worked-title">Wimble Company — CVP Full Solution</div>
+    <p style="font-size:0.9rem; margin-bottom:0.75rem;"><strong>Data:</strong> Variable cost K20,000/unit · Fixed costs K50,000,000/year · Selling price K70,000/unit</p>
+    <div class="formula">
+Contribution per unit = K70,000 − K20,000 = K50,000
+
+(1) BEP in Units = K50,000,000 ÷ K50,000 = 1,000 units
+    BEP in Value = 1,000 × K70,000 = K70,000,000
+
+(2) Units to earn K30,000,000 profit:
+    = (K50,000,000 + K30,000,000) ÷ K50,000 = K80,000,000 ÷ 50,000 = 1,600 units
+
+(3) If 400 more units (2,000 total) are made with additional fixed costs of K16,000,000:
+    New fixed costs = 50,000,000 + 16,000,000 = K66,000,000
+    Required contribution to earn same profit (K30,000,000) from 2,000 units:
+    Contribution needed = 66,000,000 + 30,000,000 = K96,000,000
+    Contribution per unit = 96,000,000 ÷ 2,000 = K48,000
+    New Selling Price = K20,000 + K48,000 = K68,000 per unit
+    </div>
+  </div>
+
+  <div class="worked">
+    <div class="worked-title">P/V Ratio Question — Two-Year Data</div>
+    <p style="font-size:0.9rem; margin-bottom:0.75rem;"><strong>Data:</strong> 2005: Sales K270,000, Profit K7,200 | 2006: Sales K342,000, Profit K20,700 | No change in fixed costs.</p>
+    <div class="formula">
+P/V Ratio = Change in Profit / Change in Sales × 100
+          = (20,700 − 7,200) / (342,000 − 270,000) × 100
+          = 13,500 / 72,000 × 100 = 18.75%
+
+Fixed Costs = (P/V ratio × Sales) − Profit
+            = (0.1875 × 270,000) − 7,200
+            = 50,625 − 7,200 = K43,425
+
+BEP in Sales Value = Fixed Costs ÷ P/V Ratio
+                   = K43,425 ÷ 0.1875 = K231,600
+
+Profit when Sales = K316,000:
+= (0.1875 × 316,000) − 43,425 = 59,250 − 43,425 = K15,825
+
+Sales to earn profit of K360:
+= (43,425 + 360) / 0.1875 = K232,520
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════
+     TOPIC 5: COSTING METHODS
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="costing-methods">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div>
+      <h2>Costing Methods</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">Job · Contract · Process costing</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Specific Order Costing</h3>
+      <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.5rem;">
+        <div style="background:#f5f5f5; padding:0.75rem 1rem; border-radius:8px; border-left:4px solid var(--teal);">
+          <strong>Job Costing</strong> — each customer order is a separate identifiable unit. Short duration work in a workshop/factory.
+        </div>
+        <div style="background:#f5f5f5; padding:0.75rem 1rem; border-radius:8px; border-left:4px solid var(--gold);">
+          <strong>Batch Costing</strong> — similar to job costing but for a batch of identical items.
+        </div>
+        <div style="background:#f5f5f5; padding:0.75rem 1rem; border-radius:8px; border-left:4px solid var(--coral);">
+          <strong>Contract Costing</strong> — like job costing but large scale, long duration (construction, civil engineering).
+        </div>
+      </div>
+    </div>
+    <div class="card gold">
+      <h3>Continuous Operational Costing</h3>
+      <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.5rem;">
+        <div style="background:#fffdf5; padding:0.75rem 1rem; border-radius:8px; border-left:4px solid var(--teal);">
+          <strong>Process Costing</strong> — continuous flow, indistinguishable units (oil refining, soap, paint, food manufacture).
+        </div>
+        <div style="background:#fffdf5; padding:0.75rem 1rem; border-radius:8px; border-left:4px solid var(--navy);">
+          <strong>Service Costing</strong> — used for service industries where output is intangible.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTRACT COSTING -->
+  <div class="card coral">
+    <h3>Contract Costing — Key Features</h3>
+    <div class="grid-2">
+      <ul style="padding-left:1.2rem;">
+        <li>Formal contract between customer and supplier</li>
+        <li>Customers' special requirements</li>
+        <li>Relatively long duration</li>
+        <li>Constructional in nature</li>
+      </ul>
+      <ul style="padding-left:1.2rem;">
+        <li>Work is based on site</li>
+        <li>Most costs are <em>direct</em> costs</li>
+        <li>Potential for progress payments &amp; retentions</li>
+        <li>Profit taken on incomplete contracts</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROFIT ON INCOMPLETE CONTRACTS -->
+  <div class="card">
+    <h3>Taking Profit on Incomplete Contracts</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Degree of Completion</th><th>Profit Recognition Rule</th></tr>
+        <tr><td>Less than 30%</td><td>❌ No profit taken — outcome too uncertain</td></tr>
+        <tr><td>30% to 80%</td><td>Profit = <strong>2/3</strong> × Notional Profit × (Cash received ÷ Value of work certified)</td></tr>
+        <tr><td>Above 80%</td><td>Profit = (Progress payments ÷ Contract price) × Estimated total profit<br><em>OR</em> (Value certified ÷ Contract price) × Total profit [if no retention]</td></tr>
+        <tr><td>Expected LOSS</td><td>⚠️ Full expected loss recognised <strong>immediately</strong> (prudence concept)</td></tr>
+      </table>
+    </div>
+    <div class="formula" style="margin-top:1rem;">
+Degree of Completion = (Costs to date ÷ Total estimated costs) × 100
+
+Notional Profit = Value of work certified − Cost of work certified
+
+Progress Payment Due = Value certified − Retention (10%) − Payments already made
+    </div>
+  </div>
+
+  <!-- CONTRACT WORKED EXAMPLE -->
+  <div class="worked">
+    <div class="worked-title">Shamboko Construction — Contract Account Summary</div>
+    <p style="font-size:0.9rem; margin-bottom:0.75rem;">Contract price K750,000,000 · Budgeted cost K600,000,000 · Period: 1 Apr 2003 – 31 Mar 2004</p>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th colspan="2">DR — Contract Account</th><th colspan="2">CR</th></tr>
+        <tr><td>Materials to site (net)</td><td class="num">147,000</td><td>Cost of work not certified</td><td class="num">40,000</td></tr>
+        <tr><td>Wages (incl. outstanding)</td><td class="num">70,000</td><td>Materials c/d (on site)</td><td class="num">24,000</td></tr>
+        <tr><td>Depreciation of plant</td><td class="num">12,000</td><td>Cost of work certified</td><td class="num">323,000</td></tr>
+        <tr><td>Hire of plant &amp; scaffolding</td><td class="num">72,000</td><td rowspan="3"></td><td></td></tr>
+        <tr><td>Supervisory staff</td><td class="num">23,000</td></tr>
+        <tr><td>Head office charges</td><td class="num">63,000</td></tr>
+        <tr class="total-row"><td><strong>Total</strong></td><td class="num"><strong>387,000</strong></td><td></td><td class="num"><strong>387,000</strong></td></tr>
+      </table>
+    </div>
+    <div class="formula" style="margin-top:1rem;">
+Degree of completion = 373,000 / 600,000 = 62.2% (between 30% and 80%)
+
+Notional Profit = 400,000 − 323,000 = K77,000
+
+Profit to P&amp;L = 2/3 × 77,000 × (330,000 / 400,000) = K42,350
+
+WIP = Costs incurred (363,000) + Profit taken (42,350) − Cash received (330,000) = K75,350
+    </div>
+  </div>
+
+  <!-- PROCESS COSTING -->
+  <div class="card navy">
+    <h3>Process Costing — 4-Step Framework</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Determine Output and Losses</strong><br>
+          Calculate expected output. Identify actual output. Determine normal loss, abnormal loss, or abnormal gain. Calculate equivalent units if there is closing WIP.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Calculate Cost per Unit</strong><br>
+          Cost per equivalent unit = Total costs ÷ Expected (good) output<br>
+          <em>Normal loss is given no share of cost.</em></div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Calculate Total Cost of Output, Losses and WIP</strong><br>
+          Normal loss cost = 0. Abnormal loss/gain valued at same rate as good output. WIP uses equivalent units.</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Complete the Process Account</strong><br>
+          DR side: inputs (materials, labour, overheads). CR side: normal loss, output (finished goods), abnormal loss. Write up abnormal loss/gain account.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card gold">
+      <h3>Types of Loss in Process</h3>
+      <h4>Normal Loss</h4>
+      <p>Expected loss — budgeted percentage of input. <strong>Given no cost</strong>; its cost is absorbed by good units.</p>
+      <h4>Abnormal Loss</h4>
+      <p>Loss in excess of normal loss. Valued at same rate as good output. Written off to income statement via Abnormal Loss Account.</p>
+      <h4>Abnormal Gain</h4>
+      <p>Less loss than expected. Valued at good output rate. Debit in process account; credit to income statement via Abnormal Gain Account.</p>
+    </div>
+    <div class="card">
+      <h3>Opening WIP Methods</h3>
+      <h4>FIFO Method</h4>
+      <p>First-in-first-out. Closing WIP valued at <em>current period costs</em>. Opening WIP costs carried forward separately and attached to completed units.</p>
+      <h4>Weighted Average Method</h4>
+      <p>Opening WIP values <em>added to current costs</em> to get an overall average. Both closing WIP and completed units use the same average cost.</p>
+    </div>
+  </div>
+
+  <!-- PROCESS WORKED EXAMPLE -->
+  <div class="worked">
+    <div class="worked-title">Process Costing — Abnormal Loss &amp; Gain Example</div>
+    <p style="font-size:0.9rem; margin-bottom:0.75rem;">Input: 1,000 units @ K4,500. Normal loss: 10% (100 units). No opening/closing WIP.</p>
+    <div class="formula">
+Expected output = 1,000 − 100 = 900 units
+Cost per unit = K4,500 ÷ 900 = K5 per unit
+
+Scenario A: Actual output = 860 units (actual loss = 140)
+  Abnormal loss = 140 − 100 = 40 units × K5 = K200
+
+Scenario B: Actual output = 920 units (actual loss = 80)
+  Abnormal gain = 100 − 80 = 20 units × K5 = K100
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════
+     Q & A SECTION
+═══════════════════════════════════════════════════════ -->
+<div class="section" id="qa">
+  <div class="section-header">
+    <div class="section-num">Q</div>
+    <div>
+      <h2>Questions &amp; Answers</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">All questions from the materials with full worked answers — click to expand</p>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="icon">📌</div>
+    <div>Click on any question to reveal the full worked answer. Questions are organised by topic.</div>
+  </div>
+
+  <!-- OVERHEAD Q&A -->
+  <h3 style="font-family:'Playfair Display',serif; color:var(--navy); margin:2rem 0 1rem; padding-bottom:0.5rem; border-bottom:2px solid var(--gold);">Topic 1 — Overhead Costing</h3>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q1</span>Carry out the allocation and apportionment of overheads to the five Encryption Inc. departments. Prepare the Overhead Analysis Sheet.</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <p><strong>Approach:</strong> For each overhead, identify the fairest basis, then split the total using the ratio of that basis across all five departments.</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Overhead</th><th>Basis</th><th class="num">Federal</th><th class="num">Intl</th><th class="num">Private</th><th class="num">Eng</th><th class="num">Stores</th><th class="num">Total</th></tr>
+          <tr><td>Indirect wages</td><td>Allocation (direct)</td><td class="num">4,000</td><td class="num">3,000</td><td class="num">3,500</td><td class="num">2,500</td><td class="num">1,500</td><td class="num">14,500</td></tr>
+          <tr><td>NAPSA (K780)</td><td>Workers 20:12:15:7:6 = 60 total</td><td class="num">260</td><td class="num">156</td><td class="num">195</td><td class="num">91</td><td class="num">78</td><td class="num">780</td></tr>
+          <tr><td>Rent &amp; Rates (K600)</td><td>Area 10k:8k:7k:3k:2k = 30k</td><td class="num">200</td><td class="num">160</td><td class="num">140</td><td class="num">60</td><td class="num">40</td><td class="num">600</td></tr>
+          <tr><td>Plant Repairs (K600)</td><td>Book value 10k:12k:5k:2k:1k = 30k</td><td class="num">200</td><td class="num">240</td><td class="num">100</td><td class="num">40</td><td class="num">20</td><td class="num">600</td></tr>
+          <tr><td>Depreciation (K450)</td><td>Book value (same ratio)</td><td class="num">150</td><td class="num">180</td><td class="num">75</td><td class="num">30</td><td class="num">15</td><td class="num">450</td></tr>
+          <tr><td>Heat &amp; Light (K300)</td><td>Area (same as rent)</td><td class="num">100</td><td class="num">80</td><td class="num">70</td><td class="num">30</td><td class="num">20</td><td class="num">300</td></tr>
+          <tr><td>Power (K560)</td><td>Horsepower 120:95:55:10:0 = 280</td><td class="num">240</td><td class="num">190</td><td class="num">110</td><td class="num">20</td><td class="num">0</td><td class="num">560</td></tr>
+          <tr><td>Insurance (K350)</td><td>Avg stock 2k:1.5k:1.5k = 5k</td><td class="num">140</td><td class="num">105</td><td class="num">105</td><td class="num">0</td><td class="num">0</td><td class="num">350</td></tr>
+          <tr><td>Medical (K20)</td><td>Workers (same as NAPSA)</td><td class="num">7</td><td class="num">4</td><td class="num">5</td><td class="num">2</td><td class="num">2</td><td class="num">20</td></tr>
+          <tr class="total-row"><td><strong>TOTAL</strong></td><td></td><td class="num"><strong>5,297</strong></td><td class="num"><strong>4,115</strong></td><td class="num"><strong>4,300</strong></td><td class="num"><strong>2,773</strong></td><td class="num"><strong>1,675</strong></td><td class="num"><strong>18,160</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q2</span>Re-apportion Encryption Inc. service department overheads using: (i) Direct method (ii) Step-down method (iii) Repetitive method (iv) Simultaneous equations</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <p><strong>Basis:</strong> Stores → Requisitions ratio Federal:International:Private = 30k:30k:20k = 3:3:2. Engineering → hours needed 5k:3k:1k = 5:3:1.</p>
+      <h4 style="margin-top:1rem; font-family:'IBM Plex Mono',monospace; color:var(--teal);">(i) DIRECT METHOD</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th class="num">Federal</th><th class="num">Intl</th><th class="num">Private</th><th class="num">Eng</th><th class="num">Stores</th></tr>
+        <tr><td>Primary totals</td><td class="num">5,297</td><td class="num">4,115</td><td class="num">4,300</td><td class="num">2,773</td><td class="num">1,675</td></tr>
+        <tr><td>Stores (3:3:2)</td><td class="num">+628</td><td class="num">+629</td><td class="num">+418</td><td class="num">–</td><td class="num">(1,675)</td></tr>
+        <tr><td>Engineering (5:3:1)</td><td class="num">+1,541</td><td class="num">+924</td><td class="num">+308</td><td class="num">(2,773)</td><td class="num">–</td></tr>
+        <tr class="total-row"><td><strong>Final</strong></td><td class="num"><strong>7,466</strong></td><td class="num"><strong>5,668</strong></td><td class="num"><strong>5,026</strong></td><td class="num"><strong>0</strong></td><td class="num"><strong>0</strong></td></tr>
+      </table></div>
+      <h4 style="margin-top:1.2rem; font-family:'IBM Plex Mono',monospace; color:var(--teal);">(ii) STEP-DOWN — Stores first (ratio includes Engineering)</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th class="num">Federal</th><th class="num">Intl</th><th class="num">Private</th><th class="num">Eng</th><th class="num">Stores</th></tr>
+        <tr><td>Primary</td><td class="num">5,297</td><td class="num">4,115</td><td class="num">4,300</td><td class="num">2,773</td><td class="num">1,675</td></tr>
+        <tr><td>Stores → 3:3:2:2</td><td class="num">+502.5</td><td class="num">+502.5</td><td class="num">+335</td><td class="num">+335</td><td class="num">(1,675)</td></tr>
+        <tr><td>Engineering → 5:3:1</td><td class="num">+1,726.7</td><td class="num">+1,036</td><td class="num">+345.3</td><td class="num">(3,108)</td><td class="num">–</td></tr>
+        <tr class="total-row"><td><strong>Final</strong></td><td class="num"><strong>7,526.2</strong></td><td class="num"><strong>5,653.5</strong></td><td class="num"><strong>4,980.3</strong></td><td class="num"><strong>0</strong></td><td class="num"><strong>0</strong></td></tr>
+      </table></div>
+      <h4 style="margin-top:1.2rem; font-family:'IBM Plex Mono',monospace; color:var(--teal);">(iii) REPETITIVE METHOD — Abbreviated final round</h4>
+      <p style="font-size:0.9rem;">Cycle until residuals are negligible. Final result: Federal K7,480.3 | International K5,664.3 | Private K5,015.4</p>
+      <h4 style="margin-top:1.2rem; font-family:'IBM Plex Mono',monospace; color:var(--teal);">(iv) SIMULTANEOUS EQUATIONS</h4>
+      <div class="formula">
+X (Stores) = 1,675 + 0.1Y
+Y (Engineering) = 2,773 + 0.2X
+
+Solving: Y = 3,171 · X = 1,992
+
+Final: Federal = 5,297 + 597.6 + 1,585.5 = K7,480.1
+       Intl    = 4,115 + 597.6 +   951.3 = K5,663.9
+       Private = 4,300 + 398.4 +   317.1 = K5,015.5
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q3</span>Calculate OAR for all 6 bases given Budgeted overhead K250,000</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <div class="tbl-wrap"><table>
+        <tr><th>Basis (Activity)</th><th>Formula</th><th>OAR</th></tr>
+        <tr><td>Units produced (25,000)</td><td>250,000 ÷ 25,000</td><td>K10 per unit</td></tr>
+        <tr><td>Total prime cost (K500,000)</td><td>250,000 ÷ 500,000 × 100</td><td>50% of prime cost</td></tr>
+        <tr><td>Material cost (K300,000)</td><td>250,000 ÷ 300,000 × 100</td><td>83.3% of materials</td></tr>
+        <tr><td>Direct wages (K200,000)</td><td>250,000 ÷ 200,000 × 100</td><td>125% of wages</td></tr>
+        <tr><td>Labour hours (12,500)</td><td>250,000 ÷ 12,500</td><td>K20 per labour hour</td></tr>
+        <tr><td>Machine hours (10,000)</td><td>250,000 ÷ 10,000</td><td>K25 per machine hour</td></tr>
+      </table></div>
+      <div class="callout"><div class="icon">⚠️</div><div>Only one rate is used in practice — pick the highest-volume activity driver.</div></div>
+    </div>
+  </div>
+
+  <!-- STANDARD COSTING Q&A -->
+  <h3 style="font-family:'Playfair Display',serif; color:var(--navy); margin:2rem 0 1rem; padding-bottom:0.5rem; border-bottom:2px solid var(--gold);">Topic 2 &amp; 3 — Standard Costing &amp; Variance Analysis (MCK Ltd)</h3>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q4</span>MCK Ltd (a): Prepare the Standard Cost Card for one unit of output</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <div class="tbl-wrap"><table>
+        <tr><th>Element</th><th>Standard Qty/Rate</th><th>Standard Cost/unit (K)</th></tr>
+        <tr><td>Direct Material</td><td>2,550 kg ÷ 5,100 = 0.5 kg @ K40/kg (K102,000 ÷ 2,550)</td><td class="num">20.00</td></tr>
+        <tr><td>Direct Labour</td><td>10,200 hrs ÷ 5,100 = 2 hrs @ K20/hr (K204,000 ÷ 10,200)</td><td class="num">40.00</td></tr>
+        <tr><td>Variable Overheads</td><td>K30,600 ÷ 5,100 units</td><td class="num">6.00</td></tr>
+        <tr><td>Fixed Overheads</td><td>K377,400 ÷ 5,100 units</td><td class="num">74.00</td></tr>
+        <tr class="total-row"><td><strong>Total Standard Cost</strong></td><td></td><td class="num"><strong>140.00</strong></td></tr>
+        <tr class="highlight"><td><strong>Selling Price (30% margin ∴ cost=70%)</strong></td><td>K140 ÷ 0.70</td><td class="num"><strong>200.00</strong></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q5</span>MCK Ltd: Calculate ALL 15 variances (b1–b15)</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <p style="margin-bottom:0.75rem;"><strong>Actual data:</strong> 4,850 units · 2,300 kg @ K98,900 · 8,000 hrs @ K162,000 · Var OH K26,000 · Fixed OH K423,000</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>#</th><th>Variance</th><th>Calculation</th><th>Amount (K)</th><th>A/F</th></tr>
+        <tr><td>1</td><td>Total Cost Variance</td><td>(4,850×140) − (98,900+162,000+26,000+423,000) = 679,000−709,900</td><td class="num">30,900</td><td>A</td></tr>
+        <tr><td>2</td><td>Total Material</td><td>(4,850×0.5×40) − 98,900 = 97,000 − 98,900</td><td class="num">1,900</td><td>A</td></tr>
+        <tr><td>3</td><td>Material Price</td><td>(40−43)×2,300 = −3×2,300</td><td class="num">6,900</td><td>A</td></tr>
+        <tr><td>4</td><td>Material Usage</td><td>(2,425−2,300)×40 = 125×40</td><td class="num">5,000</td><td>F</td></tr>
+        <tr><td>5</td><td>Total Labour</td><td>(4,850×40) − 162,000 = 194,000−162,000</td><td class="num">32,000</td><td>F</td></tr>
+        <tr><td>6</td><td>Labour Rate</td><td>(20−20.25)×8,000 = −0.25×8,000</td><td class="num">2,000</td><td>A</td></tr>
+        <tr><td>7</td><td>Labour Efficiency</td><td>(9,700−8,000)×20 = 1,700×20</td><td class="num">34,000</td><td>F</td></tr>
+        <tr><td>8</td><td>Total Var OH</td><td>(4,850×6) − 26,000 = 29,100−26,000</td><td class="num">3,100</td><td>F</td></tr>
+        <tr><td>9</td><td>Var OH Expenditure</td><td>(3×8,000) − 26,000 = 24,000−26,000</td><td class="num">2,000</td><td>A</td></tr>
+        <tr><td>10</td><td>Var OH Efficiency</td><td>(9,700−8,000)×3 = 1,700×3</td><td class="num">5,100</td><td>F</td></tr>
+        <tr><td>11</td><td>Total Fixed OH</td><td>(4,850×74) − 423,000 = 358,900−423,000</td><td class="num">64,100</td><td>A</td></tr>
+        <tr><td>12</td><td>Fixed OH Efficiency</td><td>(9,700−8,000)×37 = 1,700×37</td><td class="num">62,900</td><td>F</td></tr>
+        <tr><td>13</td><td>Fixed OH Capacity</td><td>(8,000−10,200)×37 = −2,200×37</td><td class="num">81,400</td><td>A</td></tr>
+        <tr><td>14</td><td>Sales Price Variance</td><td>Actual SP not given → assume sold at K200 = 0</td><td class="num">0</td><td>–</td></tr>
+        <tr><td>15</td><td>Sales Volume Variance</td><td>(4,850−5,100)×60 contribution = −250×60</td><td class="num">15,000</td><td>A</td></tr>
+      </table></div>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.75rem;">* Fixed OH rate/hr = 377,400 ÷ 10,200 = K37/hr · Contribution/unit = 200−140 = K60</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q6</span>MCK Ltd (c): Prepare the Reconciliation Statement</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <div class="tbl-wrap"><table>
+        <tr><th colspan="2">OPERATING STATEMENT — MCK Ltd</th><th class="num">K</th></tr>
+        <tr><td colspan="2">Budgeted Profit (5,100 units × K60 contribution − fixed costs)</td><td class="num">306,000 − 377,400 = note</td></tr>
+        <tr><td colspan="2"><em>Alternative: Budgeted contribution 5,100×60 = 306,000</em></td><td class="num"></td></tr>
+        <tr><td colspan="2">Sales Volume Variance</td><td class="num">(15,000) A</td></tr>
+        <tr><td colspan="2">Standard profit on actual sales (4,850×60 = 291,000 contribution)</td><td class="num">291,000</td></tr>
+        <tr><td>Material Price</td><td>A</td><td class="num">(6,900)</td></tr>
+        <tr><td>Material Usage</td><td>F</td><td class="num">5,000</td></tr>
+        <tr><td>Labour Rate</td><td>A</td><td class="num">(2,000)</td></tr>
+        <tr><td>Labour Efficiency</td><td>F</td><td class="num">34,000</td></tr>
+        <tr><td>Variable OH Expenditure</td><td>A</td><td class="num">(2,000)</td></tr>
+        <tr><td>Variable OH Efficiency</td><td>F</td><td class="num">5,100</td></tr>
+        <tr><td>Fixed OH Expenditure</td><td>A</td><td class="num">(45,600)</td></tr>
+        <tr><td>Fixed OH Volume</td><td>A</td><td class="num">(18,500)</td></tr>
+        <tr class="total-row"><td colspan="2"><strong>Actual Profit</strong></td><td class="num"><strong>K260,100</strong></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- CVP Q&A -->
+  <h3 style="font-family:'Playfair Display',serif; color:var(--navy); margin:2rem 0 1rem; padding-bottom:0.5rem; border-bottom:2px solid var(--gold);">Topic 4 — CVP Analysis</h3>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q7</span>BEP Example: Sales 10,000 units @ K8, Variable cost K5/unit, Fixed costs K21,000 — Calculate BEP</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <div class="formula">
+Contribution per unit = K8 − K5 = K3
+
+BEP in Units = K21,000 ÷ K3 = 7,000 units
+
+BEP in Value = 7,000 × K8 = K56,000
+
+Margin of Safety = Expected sales − BEP = 10,000 − 7,000 = 3,000 units
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q8</span>Wimble Company: Variable cost K20,000 · Fixed costs K50,000,000 · SP K70,000. Solve all 3 parts.</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <div class="formula">
+Contribution/unit = 70,000 − 20,000 = K50,000
+
+(1) BEP = 50,000,000 ÷ 50,000 = 1,000 units
+    BEP in sales value = 1,000 × 70,000 = K70,000,000
+
+(2) Units to earn K30,000,000:
+    = (50,000,000 + 30,000,000) ÷ 50,000 = 1,600 units
+
+(3) Produce 2,000 units (400 more), extra FC K16,000,000, same profit:
+    New FC = 66,000,000 · Total contribution needed = 66,000,000 + 30,000,000 = 96,000,000
+    Contribution/unit = 96,000,000 ÷ 2,000 = K48,000
+    New SP = VC + Contribution = 20,000 + 48,000 = K68,000/unit
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q9</span>P/V Ratio question: 2005 Sales K270,000 Profit K7,200 · 2006 Sales K342,000 Profit K20,700. Find BEP, profit at K316,000 sales, sales to earn K360 profit.</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <div class="formula">
+P/V Ratio = (20,700 − 7,200) / (342,000 − 270,000) = 13,500 / 72,000 = 18.75%
+
+Fixed Costs = (0.1875 × 270,000) − 7,200 = 50,625 − 7,200 = K43,425
+
+BEP (sales value) = K43,425 ÷ 0.1875 = K231,600
+
+Profit at sales K316,000 = (0.1875 × 316,000) − 43,425 = 59,250 − 43,425 = K15,825
+
+Sales to earn K360 profit = (43,425 + 360) ÷ 0.1875 = K232,520
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTRACT COSTING Q&A -->
+  <h3 style="font-family:'Playfair Display',serif; color:var(--navy); margin:2rem 0 1rem; padding-bottom:0.5rem; border-bottom:2px solid var(--gold);">Topic 5 — Contract &amp; Process Costing</h3>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q10</span>Shamboko Construction: Prepare the contract account, ascertain profit, and show balance sheet extracts at 31-03-04.</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <h4 style="font-family:'IBM Plex Mono',monospace; color:var(--teal); margin-bottom:0.5rem;">CONTRACT ACCOUNT</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th>DR</th><th class="num">K'000</th><th>CR</th><th class="num">K'000</th></tr>
+        <tr><td>Materials issued to site</td><td class="num">161,000</td><td>Materials c/d (at site)</td><td class="num">24,000</td></tr>
+        <tr><td>Less: returned</td><td class="num">(14,000)</td><td>Cost of work not certified</td><td class="num">40,000</td></tr>
+        <tr><td>Wages paid</td><td class="num">68,000</td><td>Cost of work certified</td><td class="num">323,000</td></tr>
+        <tr><td>Wages outstanding</td><td class="num">2,000</td><td></td><td></td></tr>
+        <tr><td>Plant depreciation (12.5% × 96,000)</td><td class="num">12,000</td><td></td><td></td></tr>
+        <tr><td>Hire of plant &amp; scaffolding</td><td class="num">72,000</td><td></td><td></td></tr>
+        <tr><td>Supervisory (direct + indirect)</td><td class="num">23,000</td><td></td><td></td></tr>
+        <tr><td>Head office charges</td><td class="num">63,000</td><td></td><td></td></tr>
+        <tr class="total-row"><td><strong>Total</strong></td><td class="num"><strong>387,000</strong></td><td><strong>Total</strong></td><td class="num"><strong>387,000</strong></td></tr>
+      </table></div>
+      <div class="formula">
+Degree of completion = 373,000 / 600,000 = 62.2% → between 30% and 80%
+
+Notional Profit = Value certified − Cost of work certified = 400,000 − 323,000 = K77,000
+
+Profit to P&amp;L = 2/3 × 77,000 × (330,000 / 400,000) = K42,350
+
+WIP (Balance Sheet):
+  Costs incurred to date    363,000
+  Add: Profit taken          42,350
+                            405,350
+  Less: Cash received      (330,000)
+  WIP                        75,350
+      </div>
+      <h4 style="font-family:'IBM Plex Mono',monospace; color:var(--teal); margin:1rem 0 0.5rem;">BALANCE SHEET EXTRACTS</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th colspan="3">NON-CURRENT ASSETS</th></tr>
+        <tr><td>Plant at cost</td><td class="num">96,000</td><td></td></tr>
+        <tr><td>Less: Accumulated depreciation</td><td class="num">(12,000)</td><td class="num">84,000</td></tr>
+        <tr><th colspan="3">CURRENT ASSETS</th></tr>
+        <tr><td>Stores (materials on site)</td><td class="num">24,000</td><td></td></tr>
+        <tr><td>Work In Progress</td><td class="num">75,350</td><td class="num">99,350</td></tr>
+        <tr><th colspan="3">CURRENT LIABILITIES</th></tr>
+        <tr><td>Accrued wages outstanding</td><td></td><td class="num">2,000</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q11</span>Three contracts (A, B, C): Calculate overall outcome, degree of completion, notional profit, profit taken, income statement &amp; balance sheet extracts.</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <h4 style="font-family:'IBM Plex Mono',monospace; color:var(--teal); margin-bottom:0.5rem;">(a) OVERALL OUTCOME</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th class="num">A (K)</th><th class="num">B (K)</th><th class="num">C (K)</th></tr>
+        <tr><td>Contract price</td><td class="num">140,000</td><td class="num">285,000</td><td class="num">175,000</td></tr>
+        <tr><td>Costs to date</td><td class="num">25,000</td><td class="num">150,000</td><td class="num">144,000</td></tr>
+        <tr><td>Estimated future costs</td><td class="num">78,000</td><td class="num">100,000</td><td class="num">5,000</td></tr>
+        <tr class="total-row"><td><strong>Total Est. Profit</strong></td><td class="num"><strong>37,000</strong></td><td class="num"><strong>35,000</strong></td><td class="num"><strong>26,000</strong></td></tr>
+      </table></div>
+      <h4 style="font-family:'IBM Plex Mono',monospace; color:var(--teal); margin:1rem 0 0.5rem;">(b) DEGREE OF COMPLETION</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+        <tr><td>Costs to date</td><td class="num">25,000</td><td class="num">150,000</td><td class="num">144,000</td></tr>
+        <tr><td>Total est. costs</td><td class="num">103,000</td><td class="num">250,000</td><td class="num">149,000</td></tr>
+        <tr class="highlight"><td><strong>Degree</strong></td><td><strong>24%</strong></td><td><strong>60%</strong></td><td><strong>97%</strong></td></tr>
+      </table></div>
+      <h4 style="font-family:'IBM Plex Mono',monospace; color:var(--teal); margin:1rem 0 0.5rem;">(c) NOTIONAL PROFIT</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+        <tr><td>Value of work certified</td><td class="num">30,000</td><td class="num">160,000</td><td class="num">175,000</td></tr>
+        <tr><td>Cost of work certified</td><td class="num">18,000</td><td class="num">130,000</td><td class="num">149,000</td></tr>
+        <tr class="total-row"><td><strong>Notional Profit</strong></td><td class="num"><strong>12,000</strong></td><td class="num"><strong>30,000</strong></td><td class="num"><strong>26,000</strong></td></tr>
+      </table></div>
+      <h4 style="font-family:'IBM Plex Mono',monospace; color:var(--teal); margin:1rem 0 0.5rem;">(d) PROFIT TAKEN</h4>
+      <div class="formula">
+A (24% &lt; 30%) → No profit taken
+
+B (60%: between 30% and 80%):
+  Profit = 2/3 × 30,000 × (135,000/160,000) = 2/3 × 30,000 × 0.84375 = K16,875
+
+C (97% &gt; 80%):
+  Profit = (136,000/175,000) × 26,000 = 0.777 × 26,000 = K20,206
+      </div>
+      <h4 style="font-family:'IBM Plex Mono',monospace; color:var(--teal); margin:1rem 0 0.5rem;">(e) INCOME STATEMENT &amp; BALANCE SHEET EXTRACTS</h4>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th class="num">B (K)</th><th class="num">C (K)</th></tr>
+        <tr><td>Turnover</td><td class="num">90,000</td><td class="num">136,000</td></tr>
+        <tr><td>Cost of sales</td><td class="num">73,125</td><td class="num">115,794</td></tr>
+        <tr class="total-row"><td><strong>Profit</strong></td><td class="num"><strong>16,875</strong></td><td class="num"><strong>20,206</strong></td></tr>
+      </table></div>
+      <div class="tbl-wrap" style="margin-top:0.75rem;"><table>
+        <tr><th>WIP Calculation</th><th class="num">A</th><th class="num">B</th><th class="num">C</th></tr>
+        <tr><td>Costs incurred</td><td class="num">25,000</td><td class="num">150,000</td><td class="num">144,000</td></tr>
+        <tr><td>Add: Profit taken</td><td class="num">0</td><td class="num">16,875</td><td class="num">20,206</td></tr>
+        <tr><td>Less: Progress payments</td><td class="num">(24,000)</td><td class="num">(135,000)</td><td class="num">(136,000)</td></tr>
+        <tr class="total-row"><td><strong>WIP</strong></td><td class="num"><strong>1,000</strong></td><td class="num"><strong>31,875</strong></td><td class="num"><strong>28,206</strong></td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggleQA(this)">
+      <span><span class="tag">Q12</span>Process Costing: Input 1,000 units @ K4,500. Normal loss 10%. (a) Output 860 units (b) Output 920 units — prepare process accounts.</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="qa-a">
+      <div class="formula">
+Expected output = 900 units · Cost/unit = 4,500 ÷ 900 = K5
+
+(a) Output = 860 units → Actual loss 140 · Normal loss 100 · ABNORMAL LOSS = 40 units
+
+Process Account (a):
+  DR: Cost incurred 1,000 × K4,500 = K4,500
+  CR: Normal loss (100 units) K0
+      Output to finished goods (860 × K5) = K4,300
+      Abnormal loss account (40 × K5) = K200
+  Total: K4,500 ✓
+
+Abnormal Loss Account:
+  DR: Process a/c 40 units K200
+  CR: Income statement K200
+
+(b) Output = 920 units → Actual loss 80 · Normal loss 100 · ABNORMAL GAIN = 20 units
+
+Process Account (b):
+  DR: Cost incurred K4,500
+      Abnormal gain (20 × K5) = K100
+  CR: Normal loss 100 units K0
+      Output (920 × K5) = K4,600
+  Total: K4,600 ✓
+      </div>
+    </div>
+  </div>
+
+</div><!-- end Q&A section -->
+
+<footer>
+  <p>BS 222 Cost Accounting — Visual Study Guide</p>
+  <p style="margin-top:0.4rem; color:#6b7280;">Covering: Overhead Costing · Standard Costing · Variance Analysis · CVP Analysis · Job/Contract/Process Costing</p>
+</footer>
+
+<script>
+function toggleQA(el) {
+  el.classList.toggle('open');
+  const answer = el.nextElementSibling;
+  answer.classList.toggle('show');
+}
+
+// Highlight active nav on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
